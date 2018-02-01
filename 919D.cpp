@@ -80,7 +80,7 @@ int n, m, dp[maxn][maxn][30][2];
 vii edge[maxn];
 
 int kp(int a, int b, int last, bool turn) {
-    int tmp = dp[a][b][last][turn];
+    int &tmp = dp[a][b][last][turn];
     if (tmp != -1) return tmp;
     if (turn == 0) {
         int ans = 0;
