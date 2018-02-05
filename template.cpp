@@ -33,7 +33,6 @@ using namespace std;
 #define fbit(n, i) (((n) >> (i)) & 1)
 #define bitcount(n) __builtin_popcountll(n)	
 #define _(x) ((x) & (-(x)))
-#define cn cout << '\n';
 #define text "test"
 typedef long long ll;
 typedef unsigned long long ull;
