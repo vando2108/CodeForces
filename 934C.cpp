@@ -84,7 +84,7 @@ void kp() {
 
     int res = 0;
     rep(i,0,sz(stck) - 1) res = max(res, stck[i].se + stck[i + 1].se);
-    rep(i,0,sz(stck) - 3) res = max(res, stck[i].se + stck[i + 1].se + stck[i + 2].se + stck[i + 3].se);
+    rep(i,0,sz(stck) - 3) if (stck.back().fi == 1) res = max(res, stck[i].se + stck[i + 1].se + stck[i + 2].se + stck[i + 3].se);
     printf("%d", res);
 }
 
