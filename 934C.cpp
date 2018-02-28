@@ -31,7 +31,7 @@ using namespace std;
 #define se second
 #define prec(n) fixed<<setprecision(n)
 #define fbit(n, i) (((n) >> (i)) & 1)
-#define bitcount(n) __builtin_popcountll(n)
+#define bitcount(n) __builtin_popcountll(n)	
 #define _(x) ((x) & (-(x)))
 #define text "test"
 typedef long long ll;
@@ -75,17 +75,37 @@ const int dy[] = {-1, 0, 1, 0, -1, 1, 1, -1};
 
 const int maxn = 2000 + 10;
 
-int n, a[maxn];
+int n, a[maxn], cnt[maxn][2], dp[maxn][3];
 
 void kp() {
-    vii stck;   stck.pb( ii(a[1], 1) );
-    FOR(i,2,n) if ( stck.back().fi != a[i] ) stck.pb( ii(a[i], 1) );
-        else stck.back().se++;
-
-    int res = 0;
-    rep(i,0,sz(stck) - 1) res = max(res, stck[i].se + stck[i + 1].se);
-    rep(i,0,sz(stck) - 3) if (stck.back().fi == 1) res = max(res, stck[i].se + stck[i + 1].se + stck[i + 2].se + stck[i + 3].se);
-    printf("%d", res);
+    int firstone = -1, firsttwo = -1;
+    FOR(i,1,n) {
+        cnt[i][0] = cnt[i - 1][0];
+        cnt[i][1] = cnt[i - 1][1];
+        if (a[i] == 1) {
+            cnt[i][0]++;
+            if (firstone < 0) firstone = i;
+        } else {
+            cnt[i][1]++;
+            if (firsttwo < 0) firsttwo = i;
+        }
+    }
+    if (firstone < 0 && firsttwo < 0) {
+        prinf("%d", n);
+        return;
+    }
+    FOR(i,1,n) if (a[i] == 1) {
+        
+    } else {
+        rep(j,firstone,i) {
+            dp[i][0] = max(dp[i][0], cnt[j][0] + cnt[i][1] - cnt[j][1]);
+            res = max(res, dp[i][0]);
+            dp[i][2] = max(dp[i][2], cnt[j])
+        }
+        rep(j,1,i) {
+            dp[i][2] = max(dp[i][2], dp[j][1] + cnt[i][1] - cnt[j][1]);
+        }
+    }
 }
 
 int main() {
@@ -94,6 +114,6 @@ int main() {
     sf(n);
     FOR(i,1,n) sf(a[i]);
     kp();
-
+    
     return 0;
 }
