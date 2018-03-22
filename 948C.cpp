@@ -82,10 +82,11 @@ void kp() {
     FOR(i,1,n) {
         tick.insert(v[i] + sumT[i - 1]);
         int ans = 0;
-        FORall(it,tick) if (*it <= sumT[i]) {
-            ans += *it - sumT[i - 1];
-            tick.erase(it);
+        while (!tick.empty() && *tick.begin() <= sumT[i]) {
+            ans += *tick.begin() - sumT[i - 1];
+            tick.erase(tick.begin());
         }
+        ans += sz(tick) * t[i];
         cout << ans << ' ';
     }
 }
